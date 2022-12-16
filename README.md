@@ -18,7 +18,7 @@ run
 ```bash
 perl Pairwise_matrix_MEGA.pl Poryzae/SNP_COUNTS/SNP_counts_XXXXXXXXXX > SNPcounts_WheatBlast.meg
 ```
-5. Use MEGA X to generate a neighbor-joining tree, rendered in radiation format:
+5. Use MEGA X to generate a neighbor-joining tree, rendered in radiation format. Edit in Adobe Illustrator.
 
 ![Poryzae_distance_tree.tiff](/data/Poryzae_distance_tree.tiff)
 
