@@ -45,6 +45,9 @@ Fasta file: [MonsterPlex_final_align.fasta](/data/MonsterPlex_final_align.fasta)
 ```bash
 raxml -T 4 -p 48556 -f a -x 48556 -s MonsterPlex_final_align.fasta -n MonsterPlex_final_align.raxml -m GTRGAMMA -# 100
 ```
-4. Add support values to nodes
-
+5. Add support values to nodes
+```bash
+raxml -T 2 -f b -m GTRGAMMA -n outSupport -t RAxML_bestTree.MonsterPlex_final_align.raxml -z RAxML_bootstrap.MonsterPlex_final_align.raxml
+```
+6. Create tree using Fig4_MPlexTree.R.
 
