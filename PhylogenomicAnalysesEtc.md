@@ -1,5 +1,5 @@
 ## Figure 1. Generation of a distance tree
-1. SNPs were called in all x all pairwise fashion using iSNPcaller.
+1. SNPs were called in all x all pairwise fashion using [iSNPcaller](https://github.com/drdna/iSNPcaller).
 ```bash
 perl iSNPcaller.pl Poryzae
 ```
