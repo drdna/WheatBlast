@@ -33,7 +33,7 @@ perl Pairwise_matrix_MEGA.pl Poryzae/SNP_COUNTS/SNP_counts_XXXXXXXXXX > SNPcount
 ```bash
 perl Create_fasta_dataset.pl SNP_COUNTS B71v2sh.fasta B71v2sh_ALIGN_STRINGs > AllSeqs.fasta
 ```
-2. Add host information to each sequence header:
+2. Add host information to each sequence header using [AddPopInfo2Fasta.pl](/scripts/AddPopInfo2Fasta.pl):
 ```bash
 perl AddPopInfo2Fasta.pl StrainHostList.txt AllSeqs.fasta > AllSeqsPops.fasta
 ```
