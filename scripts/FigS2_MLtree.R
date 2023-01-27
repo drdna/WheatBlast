@@ -1,4 +1,4 @@
-## Plots trees and colors taxa according to lineage affinities
+## Plots tree and colors taxa according to lineage affinities
 
 library(ape)
 library(phangorn)
