@@ -37,5 +37,12 @@ perl Create_fasta_dataset.pl SNP_COUNTS B71v2sh.fasta B71v2sh_ALIGN_STRINGs > Al
 ```bash
 perl AddPopInfo2Fasta.pl StrainHostList.txt AllSeqs.fasta > AllSeqsPops.fasta
 ```
+4. Run RAxML on AllSeqsPops.fasta file:
+```bash
+raxmlHPC-AVX -p 1234 -f a -x 1234 -s AllSeqsPops.fasta -n AllSeqsPops.raxml -m GTRGAMMA #- 1000
+```
+5. Build tree using ggtree in :
+
+
 
 
