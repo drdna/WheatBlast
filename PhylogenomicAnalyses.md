@@ -43,7 +43,7 @@ perl AddPopInfo2Fasta.pl StrainHostList.txt AllSeqs.fasta > AllSeqsPops.fasta
 ```bash
 raxmlHPC-AVX -p 1234 -f a -x 1234 -s AllSeqsPops.fasta -n AllSeqsPops.raxml -m GTRGAMMA #- 1000
 ```
-5. Build tree using ggtree in [FigS2_MLtree.R](/scripts/FigS2_MLtree.R) script:
+5. Build tree using [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html) as implemented in the [FigS2_MLtree.R](/scripts/FigS2_MLtree.R) script:
 
 
 
