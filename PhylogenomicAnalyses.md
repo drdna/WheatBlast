@@ -26,7 +26,8 @@ perl Pairwise_matrix_MEGA.pl Poryzae/SNP_COUNTS/SNP_counts_XXXXXXXXXX > SNPcount
 ## Figure S1. Generation of sampling map
 
 1. Use [FigS1_SamplingMap.Rmd]{/scripts/FigS1_SamplingMap.Rmd) script to build map from [SampleLocations.xlsx](/data/SampleLocations.xlsx) file.
-![/data/FigS1_SampleMap.png]
+
+![FigS1_SampleMap.png](/data/FigS1_SampleMap.png)
 
 ## Figure S2. Generation of a maximum likelihood tree
 
