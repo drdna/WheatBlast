@@ -31,7 +31,7 @@ perl Pairwise_matrix_MEGA.pl Poryzae/SNP_COUNTS/SNP_counts_XXXXXXXXXX > SNPcount
 
 ## Figure S2. Generation of a maximum likelihood tree
 
-1. Use [Create_fasta_dataset2022.pl](/scripts/Create_fasta_dataset2022.pl) script to generate .fasta file from SNPs called by iSNPcaller. In this case SNPs were called using alignments between each strain and a single reference genome (B71v2sh.fasta):
+1. Use [Create_fasta_dataset2022.pl](/scripts/Create_fasta_dataset2022.pl) script to generate .fasta file from SNPs called by iSNPcaller. In this case, the SNPs were called using alignments between each strain and a single reference genome - [B71v2.fasta](https://www.ncbi.nlm.nih.gov/genome/62?genome_assembly_id=1571357):
 ```bash
 perl Create_fasta_dataset.pl SNP_COUNTS B71v2sh.fasta B71v2sh_ALIGN_STRINGs > AllSeqs.fasta
 ```
