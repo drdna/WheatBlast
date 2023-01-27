@@ -8,9 +8,9 @@ perl iSNPcaller.pl Poryzae
 cp RAW_GENOMES/*fasta Poryzae/GENOMES
 ```
 3. Return to terminal #1 and type run to start. Briefly, iSNPcaller will perform the following operations:
-  i)   Convert sequence header to standard format.
-  ii)  Repeat mask all genomes
-  iii) Run BLAST to align all genomes in pairwise fashion
+  i)   Convert sequence header to standard format;
+  ii)  Repeat mask all genomes;
+  iii) Run BLAST to align all genomes in pairwise fashion; and
   iv)  Call SNPs only in uniquely aligned regions of the genome
 ```bash
 run
