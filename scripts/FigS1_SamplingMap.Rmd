@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "FigS1_SamplingMap.Rmd"
 author: "Emerson"
 date: "3/25/2022"
 output: html_document
@@ -22,7 +22,7 @@ library(janitor)
 ```{r}
 
 
-tab1 <- readxl::read_excel("table1_with_coordinates.xlsx")
+tab1 <- readxl::read_excel("SamplingLocations.xlsx")
 ```
 
 ## Prepare the data
@@ -132,8 +132,8 @@ scale_fill_manual(values = myColors)+
   labs(fill = "Host genus", x = "Longitude", y = "Latitude")+
 scale_linetype(guide = 'none')
 
-ggsave("map_table1.png", dpi = 600, bg = "white")
-#ggsave("map_table1.pdf", dpi = 600, bg = "white")
+ggsave("FigS1_SamplingMap.png", dpi = 600, bg = "white")
+#ggsave("FigS1_SamplingMap.pdf", dpi = 600, bg = "white")
 ```
 
 
