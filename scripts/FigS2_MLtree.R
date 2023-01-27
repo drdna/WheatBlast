@@ -10,7 +10,7 @@ library(ggrepel)
 library(viridisLite)
 
 #read in data
-Tree1 <- read.tree("AllSeqs4.fasta.raxml.support")
+Tree1 <- read.tree("AllSeqsPops.raxml.support")
 
 # assign the groups
 groupInfo <- split(Tree1$tip.label, gsub(".*_", "", Tree1$tip.label))
