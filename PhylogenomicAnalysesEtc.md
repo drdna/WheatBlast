@@ -1,5 +1,5 @@
 ## Assessing iSNPcaller error rates
-Briefly, errors rates were determined by using iSNPcaller to identify SNPs between two genome assemblies generated from non-overlapping sub-samples of the same raw read dataset.
+Briefly, errors rates were determined by using iSNPcaller to identify SNPs between independent assemblies of the same genome generated from the same raw read dataset.
 The trim-velvet-FR.sh script was used to perform the following operations:
 1. Low quality sequence and adapters were trimmed from the raw reads using Trimmomatic with parameters: ILLUMINACLIP:NexteraPE-PE.fa:2:30:10 SLIDINGWINDOW:20:20 MINLEN 130
 2. The resulting paired and unpaired forward reads were concatenated into forwardReads.fq
