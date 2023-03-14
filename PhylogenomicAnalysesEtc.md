@@ -1,3 +1,25 @@
+## Assessing iSNPcaller error rates
+Briefly, errors rates were determined by using iSNPcaller to identify SNPs between two genome assemblies generated from non-overlapping sub-samples of the same raw read dataset.
+The trim-velvet-FR.sh script was used to perform the following operations:
+1. Low quality sequence and adapters were trimmed from the raw reads using Trimmomatic with parameters: ILLUMINACLIP:NexteraPE-PE.fa:2:30:10 SLIDINGWINDOW:20:20 MINLEN 130
+2. The resulting paired and unpaired forward reads were concatenated into forwardReads.fq
+3. The resulting paired and unpaired reverse reads were concatenated into reverseReads.fq
+4. The forward and reverse reads were assembled separately using VelvetOptimiser using a kmer range from 89 to 129 with a step size of 2
+5. A new iSNPcaller project named FalseSNPs was intiated:
+```bash
+perl iSNPcaller_MT.pl FalseSNPs
+```
+The process was then killed using ctrl-c
+6. The "forward and reverse" genome assemblies were copied into the GENOMES directory:
+```bash
+cp */velvet*[FR]/*fasta FalseSNPs/GENOMES
+```
+7. iSNPcaller was re-started inside the SLURM script, iSNPcaller_MT.sh:
+```bash
+sbatch $script/iSNPcaller_MT.sh FalseSNPs
+```
+8. The resulting summary SNP file was then read into the FalseSNPs.R script for plotting
+
 ## Figure 1. Generation of a distance tree
 1. SNPs were called in all-by-all pairwise fashion using [iSNPcaller](https://github.com/drdna/iSNPcaller).
 ```bash
