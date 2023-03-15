@@ -6,7 +6,10 @@ The [trim-velvet-FR.sh](/scripts/trim-velvet-FR.sh) script was used to perform t
 3. The resulting paired and unpaired reverse reads were concatenated into reverseReads.fq
 4. The forward and reverse reads were assembled separately using VelvetOptimiser using the kmer range 89 to 129, with a step size of 2:
 ```bash
-for f in `ls /project/farman_uksr/PE_datasets2/ | awk -F '/|_' '{print $1}' | sort | uniq | grep -v GB | grep -v ERR| grep -v ^WB`; do sbatch $script/trim-velvet-FRreads.sh /project/farman_uksr/PE_datasets2 $f yes; done
+for f in `ls /project/farman_uksr/PE_datasets2/ | awk -F '/|_' '{print $1}' \ 
+ | sort | uniq | grep -v GB | grep -v ERR| grep -v ^WB`; \
+ do sbatch $script/trim-velvet-FRreads.sh \
+ /project/farman_uksr/PE_datasets2 $f yes; done
 ```
 5. Sequence headers were standardized:
 ```bash
