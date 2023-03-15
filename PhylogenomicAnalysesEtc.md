@@ -4,7 +4,10 @@ The trim-velvet-FR.sh script was used to perform the following operations:
 1. Low quality sequence and adapters were trimmed from the raw reads using Trimmomatic with parameters: ILLUMINACLIP:NexteraPE-PE.fa:2:30:10 SLIDINGWINDOW:20:20 MINLEN 130
 2. The resulting paired and unpaired forward reads were concatenated into forwardReads.fq
 3. The resulting paired and unpaired reverse reads were concatenated into reverseReads.fq
-4. The forward and reverse reads were assembled separately using VelvetOptimiser using the kmer range 89 to 129, with a step size of 2
+4. The forward and reverse reads were assembled separately using VelvetOptimiser using the kmer range 89 to 129, with a step size of 2:
+```bash
+for f in `ls /project/farman_uksr/PE_datasets2/ | awk -F '/|_' '{print $1}' | sort | uniq | grep -v GB | grep -v ERR| grep -v ^WB`; do sbatch $script/trim-velvet-FRreads.sh /project/farman_uksr/PE_datasets2 $f yes; done
+```
 5. A new iSNPcaller project named FalseSNPs was intiated:
 ```bash
 perl iSNPcaller_MT.pl FalseSNPs
