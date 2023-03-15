@@ -8,20 +8,29 @@ The [trim-velvet-FR.sh](/scripts/trim-velvet-FR.sh) script was used to perform t
 ```bash
 for f in `ls /project/farman_uksr/PE_datasets2/ | awk -F '/|_' '{print $1}' | sort | uniq | grep -v GB | grep -v ERR| grep -v ^WB`; do sbatch $script/trim-velvet-FRreads.sh /project/farman_uksr/PE_datasets2 $f yes; done
 ```
-5. A new iSNPcaller project named FalseSNPs was intiated:
+5. Sequence headers were standardized:
 ```bash
-perl iSNPcaller_MT.pl FalseSNPs
+for f in `ls ASSEMBLIES/*fasta`; do perl SimpleFastaHeaders_SB.pl $f; done
 ```
-The process was then killed using ctrl-c
-6. The "forward and reverse" genome assemblies were copied into the GENOMES directory:
+6. The genomes were repeat-masked using the RMSA_MT.sh SLURM script:
 ```bash
-cp */velvet*[FR]/*fasta FalseSNPs/GENOMES
+sbatch RMSA_MT.sh ASSEMBLIES
 ```
-7. iSNPcaller was re-started inside the SLURM script, iSNPcaller_MT.sh:
+7. Masked genomes generated using the forward and reverse reads were then blasted against one another:
 ```bash
-sbatch $script/iSNPcaller_MT.sh FalseSNPs
+mkdir SELFBLASTs
+cd ASSEMBLIES
+for f in `ls *R_nh_masked*`; do blastn -query $f -subject ${f/-R_/-F_} -evalue 1e-50 -max_target_seqs 20000 -outfmt '6 qseqid sseqid qstart qend sstart send btop' > ../SELFBLASTs/${f/_*/}.${f/R_*/F}.BLAST; done
 ```
-8. The resulting summary SNP file was then read into the FalseSNPs.R script for plotting
+8. SNPs were called using the iSNPcaller SNP calling module:
+```bash
+perl Run_SU4.pl SELFBLASTs SELFSNPs
+```
+9. The SNP summary file was condensed into a format suitable for loading into an R script for plotting:
+```bash
+perl Consense_SNP_summary.pl 
+```
+10. The condensed SNP summary file was then read into the FalseSNPs.R script for plotting
 
 ## Figure 1. Generation of a distance tree
 1. SNPs were called in all-by-all pairwise fashion using [iSNPcaller](https://github.com/drdna/iSNPcaller).
