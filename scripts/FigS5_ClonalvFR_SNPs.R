@@ -7,7 +7,7 @@ library("PopGenome")
 my_df <- read.table("~/Clonal_v_FR_genome_SNPs.txt", header=FALSE)
 colnames(my_df) <- c("blast", "SNPs", "type")
 
-pdf("~/FigS3_ClonalvFR_SNPs.pdf", 3, 6)
+pdf("~/FigS5_ClonalvFR_SNPs.pdf", 3, 6)
 ggplot(my_df, aes(x= type, y = SNPs)) +
   geom_boxplot(outlier.shape = NA) + 
   geom_jitter(color = my_df$type, size = 3, width = 0.2, alpha = 0.5) +
