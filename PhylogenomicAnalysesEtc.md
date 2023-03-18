@@ -1,40 +1,3 @@
-## Assessing iSNPcaller error rates
-Briefly, errors rates were determined by using iSNPcaller to identify SNPs between independent assemblies of the same genome generated from the same raw read dataset.
-The [trim-velvet-FR.sh](/scripts/trim-velvet-FR.sh) script was used to perform the following operations:
-1. Low quality sequence and adapters were trimmed from the raw reads using Trimmomatic with parameters: ILLUMINACLIP:NexteraPE-PE.fa:2:30:10 SLIDINGWINDOW:20:20 MINLEN 130
-2. The resulting paired and unpaired forward reads were concatenated into forwardReads.fq
-3. The resulting paired and unpaired reverse reads were concatenated into reverseReads.fq
-4. The forward and reverse reads were assembled separately using VelvetOptimiser using the kmer range 89 to 129, with a step size of 2:
-```bash
-for f in `ls /project/farman_uksr/PE_datasets2/ | awk -F '/|_' '{print $1}' \ 
- | sort | uniq | grep -v GB | grep -v ERR| grep -v ^WB`; \
- do sbatch $script/trim-velvet-FRreads.sh \
- /project/farman_uksr/PE_datasets2 $f yes; done
-```
-5. Sequence headers were standardized:
-```bash
-for f in `ls ASSEMBLIES/*fasta`; do perl SimpleFastaHeaders_SB.pl $f; done
-```
-6. The genomes were repeat-masked using the RMSA_MT.sh SLURM script:
-```bash
-sbatch RMSA_MT.sh ASSEMBLIES
-```
-7. Masked genomes generated using the forward and reverse reads were then blasted against one another:
-```bash
-mkdir SELFBLASTs
-cd ASSEMBLIES
-for f in `ls *R_nh_masked*`; do blastn -query $f -subject ${f/-R_/-F_} -evalue 1e-50 -max_target_seqs 20000 -outfmt '6 qseqid sseqid qstart qend sstart send btop' > ../SELFBLASTs/${f/_*/}.${f/R_*/F}.BLAST; done
-```
-8. SNPs were called using the iSNPcaller SNP calling module:
-```bash
-perl Run_SU4.pl SELFBLASTs SELFSNPs
-```
-9. The SNP summary file was condensed into a format suitable for loading into an R script for plotting:
-```bash
-perl Consense_SNP_summary.pl 
-```
-10. The condensed SNP summary file was then read into the FalseSNPs.R script for plotting
-
 ## Figure 1. Generation of a distance tree
 1. SNPs were called in all-by-all pairwise fashion using [iSNPcaller](https://github.com/drdna/iSNPcaller).
 ```bash
@@ -85,6 +48,57 @@ raxmlHPC-AVX -p 1234 -f a -x 1234 -s AllSeqsPops.fasta -n AllSeqsPops.raxml -m G
 raxml -T 2 -f b -m GTRGAMMA -n support -t RAxML_bestTree.AllSeqsPops.raxml -z RAxML_bootstrap.AllSeqsPops.raxml
 ```
 7. Use the resulting .support file to build tree using [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html) as implemented in the [FigS2_MLtree.R](/scripts/FigS2_MLtree.R) script:
+
+## Figure S3 & S4. Identifying populations using k-means clustering
+
+1. Generate a down-sampled dataset (every 20th SNP) in STRUCTURE format using Generate_STRUCTURE.pl script:
+Usage: Generate_STRUCTURE.pl <strain-list> <iSNPcaller_outdir> <ref-genome> <downsample-factor>
+```bash
+Generate_STRUCTURE.pl StrainList B71v2sh_SNPs B71v2sh.fasta 20
+awk 'NR > 3' B71v2sh_SNPs_structure20 | gzip > B71v2sh_SNPs_BIC20.gz
+```
+2. Use B71v2sh_SNPs_BIC20.gz as input to the FigS3&4_BIC_DAPC.R script:
+ 
+![FigS3_BIC1-50.png](/images/FigS3_BIC1-50.png)
+
+![FigS4_DAPC.png](/images/FigS4_DAPC.png)
+ 
+## Figure S5. Assessing iSNPcaller error rates
+Briefly, errors rates were determined by using iSNPcaller to identify SNPs between independent assemblies of the same genome generated from the same raw read dataset.
+The [trim-velvet-FR.sh](/scripts/trim-velvet-FR.sh) script was used to perform the following operations:
+1. Low quality sequence and adapters were trimmed from the raw reads using Trimmomatic with parameters: ILLUMINACLIP:NexteraPE-PE.fa:2:30:10 SLIDINGWINDOW:20:20 MINLEN 130
+2. The resulting paired and unpaired forward reads were concatenated into forwardReads.fq
+3. The resulting paired and unpaired reverse reads were concatenated into reverseReads.fq
+4. The forward and reverse reads were assembled separately using VelvetOptimiser using the kmer range 89 to 129, with a step size of 2:
+```bash
+for f in `ls /project/farman_uksr/PE_datasets2/ | awk -F '/|_' '{print $1}' \ 
+ | sort | uniq | grep -v GB | grep -v ERR| grep -v ^WB`; \
+ do sbatch $script/trim-velvet-FRreads.sh \
+ /project/farman_uksr/PE_datasets2 $f yes; done
+```
+5. Sequence headers were standardized:
+```bash
+for f in `ls ASSEMBLIES/*fasta`; do perl SimpleFastaHeaders_SB.pl $f; done
+```
+6. The genomes were repeat-masked using the RMSA_MT.sh SLURM script:
+```bash
+sbatch RMSA_MT.sh ASSEMBLIES
+```
+7. Masked genomes generated using the forward and reverse reads were then blasted against one another:
+```bash
+mkdir SELFBLASTs
+cd ASSEMBLIES
+for f in `ls *R_nh_masked*`; do blastn -query $f -subject ${f/-R_/-F_} -evalue 1e-50 -max_target_seqs 20000 -outfmt '6 qseqid sseqid qstart qend sstart send btop' > ../SELFBLASTs/${f/_*/}.${f/R_*/F}.BLAST; done
+```
+8. SNPs were called using the iSNPcaller SNP calling module:
+```bash
+perl Run_SU4.pl SELFBLASTs SELFSNPs
+```
+9. The SNP summary file was condensed into a format suitable for loading into an R script for plotting:
+```bash
+perl Consense_SNP_summary.pl 
+```
+10. The condensed SNP summary file was then read into the FalseSNPs.R script for plotting
 
 
 
