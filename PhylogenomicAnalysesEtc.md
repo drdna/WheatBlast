@@ -52,7 +52,7 @@ raxml -T 2 -f b -m GTRGAMMA -n support -t RAxML_bestTree.AllSeqsPops.raxml -z RA
 ## Figure S3 & S4. Identifying populations using k-means clustering
 
 1. Generate a down-sampled dataset (every 20th SNP) in STRUCTURE format using Generate_STRUCTURE.pl script:
-Usage: Generate_STRUCTURE.pl <strain-list> <iSNPcaller_outdir> <ref-genome> <downsample-factor>
+Usage: Generate_STRUCTURE.pl <strain-list> <iSNPcaller-outdir> <ref-genome> <downsample-factor>
 ```bash
 Generate_STRUCTURE.pl StrainList B71v2sh_SNPs B71v2sh.fasta 20
 awk 'NR > 3' B71v2sh_SNPs_structure20 | gzip > B71v2sh_SNPs_BIC20.gz
