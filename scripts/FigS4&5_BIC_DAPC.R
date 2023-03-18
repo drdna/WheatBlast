@@ -89,7 +89,7 @@ plotOrder <- plotOrder[order(plotOrder[,'Group']), ]
 plotOrder["K"][plotOrder["K"] == 10] <- "A"
 strainOrder = plotOrder$Isolate
 
-# gather Ceresini host data
+# gather Ceresini sample data
 PCplots <- read.table("~/PlotCeresini", header = F)
 colnames(PCplots) <- c("Isolate", "K", "Group", "Posterior")
 PCplots["Group"][PCplots["Group"] == 0] <- 11
@@ -99,7 +99,7 @@ PCplots$Group <- factor(PCplots$Group)
 rownames(PCplots) <- PCplots$Isolate
 PCplots <- PCplots[order(match(rownames(PCplots), strainOrder)), , drop = FALSE]
 
-#gather Farman host data
+# gather Farman sample data
 MFplots <- read.table("~/PlotFarman", header = F)
 colnames(MFplots) <- c("Isolate", "K", "Group", "Posterior")
 MFplots["Group"][MFplots["Group"] == 0] <- 11
@@ -112,7 +112,7 @@ MFplots <- MFplots[order(match(rownames(MFplots), strainOrder)), , drop = FALSE]
 # merge datasets
 plotOrder = rbind(plotOrder, PCplots, MFplots)
 
-#build the plots
+# build the plots
 facetLabels <- c("A","B","C")
 names(facetLabels) <- c("A", "B", "C")
 
