@@ -5,7 +5,7 @@ library("RColorBrewer")
 n <- 20
 palette <- distinctColorPalette(n)
 
-df <- read.table("~/B71v2sh_SNPs_BIC20", row.names = 1, header = FALSE) # StructureIn.str is OK
+df <- read.table("~/B71v2sh_SNPs_BIC20.gz", row.names = 1, header = FALSE) # StructureIn.str is OK
 
 D <- df2genind(df, ncode = 1, ploidy = 1, NA.char = "-9")
 
