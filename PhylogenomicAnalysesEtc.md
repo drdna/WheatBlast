@@ -62,7 +62,7 @@ awk 'NR > 3' B71v2sh_SNPs_structure20 | gzip > B71v2sh_SNPs_BIC20.gz
 2. Use B71v2sh_SNPs_BIC20.gz as input to the FigS3&4_BIC_DAPC.R script:
 ![FigS3_BIC1-50.png](/images/FigS3_BIC1-50.png)
 ### FigS3.Population division using discriminant analysis of principal components
-![FigS4_DAPC.tif](/images/FigS4_DAPC.tif)
+![FigS4_DAPC.tiff](/images/FigS4_DAPC.tiff)
 ### Figure S4. Population memberships of isolates included in this study
  
 ## Figure S5. Assessing iSNPcaller error rates
