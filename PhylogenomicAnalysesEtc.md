@@ -48,7 +48,7 @@ raxmlHPC-AVX -p 1234 -f a -x 1234 -s AllSeqsPops.fasta -n AllSeqsPops.raxml -m G
 raxml -T 2 -f b -m GTRGAMMA -n support -t RAxML_bestTree.AllSeqsPops.raxml -z RAxML_bootstrap.AllSeqsPops.raxml
 ```
 7. Use the resulting .support file to build tree using [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html) as implemented in the [FigS2_MLtree.R](/scripts/FigS2_MLtree.R) script:
-![FigS2_MLtree.tif](/images/FigS2MLtree.tif)
+![FigS2_MLtree.tif](/images/FigS2_MLtree.tif)
 
 ## Figure S3 & S4. Identifying populations using k-means clustering
 
