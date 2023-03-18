@@ -51,7 +51,7 @@ raxml -T 2 -f b -m GTRGAMMA -n support -t RAxML_bestTree.AllSeqsPops.raxml -z RA
 
 ## Figure S3 & S4. Identifying populations using k-means clustering
 
-1. Generate a down-sampled dataset (every 20th SNP) in STRUCTURE format using Generate_STRUCTURE.pl script:
+1. Generate a down-sampled dataset (every 20th SNP) in STRUCTURE format using [Generate_STRUCTURE.pl](/scripts/Generate_STRUCTURE.pl) script:
 ```bash
 Usage: Generate_STRUCTURE.pl <strain-list> <iSNPcaller-outdir> <ref-genome> <downsample-factor>
 ```
@@ -59,7 +59,7 @@ Usage: Generate_STRUCTURE.pl <strain-list> <iSNPcaller-outdir> <ref-genome> <dow
 Generate_STRUCTURE.pl StrainList B71v2sh_SNPs B71v2sh.fasta 20
 awk 'NR > 3' B71v2sh_SNPs_structure20 | gzip > B71v2sh_SNPs_BIC20.gz
 ```
-2. Use B71v2sh_SNPs_BIC20.gz as input to the FigS3&4_BIC_DAPC.R script:
+2. Use B71v2sh_SNPs_BIC20.gz as input to the [FigS3&4_BIC_DAPC.R](/scripts/FigS3&4_BIC_DAPC.R) script:
 ![FigS3_BIC1-50.png](/images/FigS3_BIC1-50.png)
 ### FigS3.Population division using discriminant analysis of principal components
 ![FigS4_DAPC10.tif](/images/FigS4_DAPC10.tif)
@@ -100,7 +100,7 @@ perl Run_SU4.pl SELFBLASTs SELFSNPs
 ```bash
 perl Consense_SNP_summary.pl 
 ```
-10. The condensed SNP summary file was then read into the FigS5_ClonalvFR_SNPs.R script for plotting:
+10. The condensed SNP summary file was then read into the [FigS5_ClonalvFR_SNPs.R](/scripts/FigS5_ClonalvFR_SNPs.R) script for plotting:
 
 ![FigS5_ClonalvFR_SNPs.tif](/images/FigS5_ClonalvFR_SNPs.tif)
 ### Figure S5. Determining clonality through divergence analysis.
