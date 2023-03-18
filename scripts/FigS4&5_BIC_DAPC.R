@@ -113,15 +113,15 @@ MFplots <- MFplots[order(match(rownames(MFplots), strainOrder)), , drop = FALSE]
 plotOrder = rbind(plotOrder, PCplots, MFplots)
 
 # build the plots
-facetLabels <- c("All Samples","Near Wheat","Away from Wheat")
+facetLabels <- c("All Samples","Near Wheat","Away from\nWheat")
 names(facetLabels) <- c("A", "B", "C")
 
 p3 <- ggplot(plotOrder, aes(x = Isolate, y = Posterior, fill = Group))
 p3 <- p3 + geom_bar(stat = "identity", width = 0.5)
 p3 <- p3 + scale_x_discrete(guide=guide_axis(angle=90), limits = strainOrder)
 p3 <- p3 + facet_grid(K ~ ., space = "fixed", labeller = labeller(K = facetLabels))
-p3 <- p3 + ylab("Population membership")
-p3 <- p3 + theme(aspect.ratio = 1/20, panel.spacing = unit(1, "pt"), strip.text.y = element_text(size = 12, angle = 90))
+p3 <- p3 + ylab("Population\nmembership")
+p3 <- p3 + theme(aspect.ratio = 1/20, panel.spacing = unit(1, "pt"), strip.text.y = element_text(size = 8, angle = 0))
 p3 <- p3 + scale_fill_manual(values = c("#FF63B6", "#F8766D", "#64B200", "#AEA200", 
                                         "#00A6FF", "#B385FF", "#DB8E00", "#00BD5C",
                                         "#00C1A7", "#00BADE", "black"), breaks = c(1,2,3,4,5,6,7,8,9,10)) 
