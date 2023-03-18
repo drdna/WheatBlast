@@ -103,7 +103,7 @@ perl Consense_SNP_summary.pl
 10. The condensed SNP summary file was then read into the FigS5_ClonalvFR_SNPs.R script for plotting:
 
 ![FigS5_ClonalvFR_SNPs.tif](/images/FigS5_ClonalvFR_SNPs.tif)
-
+### Figure S5. Determining clonality through divergence analysis.
 
 
 
